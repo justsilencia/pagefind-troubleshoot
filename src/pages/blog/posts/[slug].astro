@@ -18,18 +18,13 @@ const { Content, frontmatter } = Astro.props.post;
 ---
 
 <Layout title={frontmatter.title + " | Health Freak"}>
-  <div class="lg:grid lg:grid-cols-4 lg:gap-8">
-    <div class="mt-8 lg:col-span-3">
+  <div>
+    <div class="mt-2">
       <article data-pagefind-body>
-        <div class="m-auto relative">
-          <div class="h-[250px] overflow-hidden">
-            <img class="main-img" src={frontmatter.image} />
-          </div>
-        </div>
         <center>
           <h1>{frontmatter.title}</h1>
+          <Content />
         </center>
-        <Content />
       </article>
     </div>
   </div>

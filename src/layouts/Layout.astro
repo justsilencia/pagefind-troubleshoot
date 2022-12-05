@@ -33,27 +33,6 @@ const { title } = Astro.props;
     </footer>
   </body>
 </html>
-<script client:load>
-  // Search bar
-  const searchEl = document.getElementById("search");
-  const bgOverlay = document.getElementById("bg-overlay");
-  searchEl.addEventListener("click", () => {
-    bgOverlay.classList.remove("hidden");
-    searchEl.focus();
-  });
-  bgOverlay.addEventListener("click", () => {
-    bgOverlay.classList.add("hidden");
-    searchEl.innerHTML = "";
-    new PagefindUI({ element: "#search", showImages: false });
-  });
-
-  // Menu toggle when anything outside mobile menu is clicked.
-  const mainDiv = document.getElementById("main-content");
-
-  mainDiv.addEventListener("click", () => {
-    document.getElementById("hamburger").checked = false;
-  });
-</script>
 
 <style>
   main {

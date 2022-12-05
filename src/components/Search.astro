@@ -1,0 +1,45 @@
+<div id="search"></div>
+
+<style is:global>
+  #search {
+    z-index: 11000;
+  }
+  #search input {
+    width: calc(100vw / 4);
+    padding: 6px;
+    border-radius: 25px;
+    background: rgb(226, 232, 240);
+    outline: 1px solid lightblue;
+    z-index: 11000;
+  }
+  #search .pagefind-ui__results-area {
+    background-color: #fff;
+    outline: 3px solid lightblue;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  #search .pagefind-ui__message {
+    font-size: 12px;
+    font-weight: bold;
+  }
+  #search .pagefind-ui__result-excerpt {
+    font-size: 14px;
+  }
+  #search .pagefind-ui__result-link {
+    text-decoration: none;
+    color: orange;
+    font-size: 16px;
+  }
+</style>
+
+<script client:load>
+  const searchBtn = document.getElementById("search-btn");
+  searchBtn.addEventListener("click", () => {
+    if (document.getElementById("search").innerHTML.trim() === "") {
+      new PagefindUI({ element: "#search", showImages: false });
+    } else {
+      document.getElementById("search").innerHTML = "";
+    }
+  });
+</script>

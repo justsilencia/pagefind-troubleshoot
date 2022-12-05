@@ -1,0 +1,74 @@
+---
+export interface Props {
+  title: string;
+  body: string;
+  href: string;
+  img: string;
+  date?: Date;
+}
+
+const { href, title, body, img, date } = Astro.props;
+---
+
+<div class="link-card">
+  <a href={href}>
+    <div class="lg:flex">
+      {
+        img !== "" ? (
+          <div>
+            <img class="mx-auto rounded-[0.35rem] lg:w-[200px]" src={img} />
+          </div>
+        ) : (
+          ""
+        )
+      }
+      <div class="lg: ml-4 md:basis-[375px]">
+        <h3 class="inline">{title}</h3>
+        <span class="text-xs">
+          {date ? new Date(date).toLocaleDateString() : ""}
+        </span>
+        {body !== "" ? <p class="text-sm">{body}</p> : ""}
+      </div>
+    </div>
+  </a>
+</div>
+<style>
+  .link-card {
+    list-style: none;
+    display: flex;
+    padding: 0.15rem;
+    margin-bottom: 32px;
+    background-color: white;
+    background-image: var(--accent-gradient);
+    background-size: 400%;
+    border-radius: 0.5rem;
+    background-position: 99.5%;
+    transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  }
+
+  .link-card > a {
+    width: 100%;
+    text-decoration: none;
+    line-height: 1.4;
+    padding: 1rem 1.3rem;
+    border-radius: 0.35rem;
+    color: #111;
+    background-color: white;
+    opacity: 0.8;
+  }
+  h3 {
+    transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  p {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0;
+    color: #444;
+  }
+  .link-card:is(:hover, :focus-within) {
+    background-position: 0;
+  }
+  .link-card:is(:hover, :focus-within) h2 {
+    color: rgb(var(--accent));
+  }
+</style>

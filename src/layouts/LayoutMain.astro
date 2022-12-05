@@ -1,0 +1,25 @@
+---
+import Card from "../components/Card.astro";
+
+export interface Props {
+  posts: Array<object>;
+  heading1: String;
+  heading2: String;
+}
+
+const { posts, heading1, heading2 } = Astro.props;
+---
+
+<div class="rounded-md md:p-4 md:grid md:grid-cols-3 md:gap-4 lg:gap-8">
+  <div class="md:col-span-2">
+    <h1 class="text-white inline-block">{heading1}</h1>
+    <a href="/blog/posts/1">View More!</a>
+    <div class="bg-slate-500 bg-opacity-70 p-4 md:p-10 rounded-lg">
+      {posts.map((post: any) => <Card href={"/blog/posts/" + post.frontmatter.slug} img={post.frontmatter.image} title={post.frontmatter.title} body={post.frontmatter.excerpt} />)}
+    </div>
+  </div>
+  <div>
+    <h1 class="text-white">{heading2}</h1>
+    <div class="shadow-lg rounded-lg">Testing</div>
+  </div>
+</div>

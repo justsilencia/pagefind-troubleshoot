@@ -1,0 +1,75 @@
+---
+import Search from "./Search.astro";
+---
+
+<nav class="fixed w-[100vw] z-[9999]">
+  <div class="flex items-center shadow-md p-4 md:py-2 md:px-36 lg:px-52 bg-slate-100">
+    <!-- Mobile expand menu button -->
+    <input type="checkbox" name="hamburger" id="hamburger" class="peer" hidden />
+    <label for="hamburger" class="peer-checked:hamburger block relative z-20 p-6 mr-0 cursor-pointer border-l lg:border-l-0 lg:hidden">
+      <div aria-hidden="true" class="m-auto h-0.5 w-6 rounded bg-sky-900 transition duration-300"></div>
+      <div aria-hidden="true" class="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900 transition duration-300"></div>
+    </label>
+    <div
+      class="fixed bg-slate-300 lg:bg-slate-100 z-[2000] peer-checked:translate-x-0 inset-0 w-[calc(100%-5.5rem)] md:w-[40vw] translate-x-[-100%] border-r shadow-xl transition duration-300 lg:border-r-0 lg:w-auto lg:static lg:shadow-none lg:translate-x-0 flex-1 order-1 lg:order-first"
+    >
+      <!-- Main menu -->
+      <div class="relative z-20">
+        <ul class="px-6 pt-32 text-black space-y-8 md:px-12 lg:space-y-0 lg:flex lg:space-x-12 lg:pt-0">
+          <li>
+            <a href="#" class="group hover:bg-blue-200 p-3 rounded-md">
+              <span class="relative">News</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group hover:bg-blue-200 p-3 rounded-md">
+              <span class="relative">Blog</span>
+            </a>
+          </li>
+          <li class="hidden lg:block">
+            <a href="#" id="search-btn">
+              <img class="w-8 h-6 rounded-full" src="/images/icons/search.svg" alt="Search icon" />
+            </a>
+            <!-- <Search /> -->
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="order-first md:pt-1 lg:order-1 lg:flex-1">
+      <div class="flex items-center lg:block">
+        <!-- Brand Logo. -->
+        <div class="md:text-center">
+          <a href="/">
+            <h2 class="text-[16px] md:text-[22px] md:inline text-black">Testing Pagefind</h2>
+            <div class="md:inline md:ml-2 text-sm">Astro Implementation</div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Secondary menu. -->
+    <div class="flex-1 mr-5 text-right order-first lg:order-2 lg:mr-0">
+      <div class="flex justify-end items-center text-right">
+        <a href="#" id="search-btn" class="mr-5 lg:hidden">
+          <img class="w-8 h-6 rounded-full" src="/images/icons/search.svg" alt="Search icon" />
+        </a>
+        <button
+          type="button"
+          class="text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+          id="user-menu-button"
+          aria-expanded="false"
+          data-dropdown-toggle="user-dropdown"
+          data-dropdown-placement="bottom"
+        >
+          <span class="sr-only">Open user menu</span>
+          <img class="w-8 h-8 rounded-full" src="/images/icons/empty-profile-filled.svg" alt="empty profile photo" />
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  h2 {
+    font-family: Dalfitra !important;
+  }
+</style>

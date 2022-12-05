@@ -1,0 +1,23 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Search from "../../../components/Search.astro";
+import Card from "../../../components/Card.astro";
+export async function getStaticPaths({ paginate }: any) {
+  const posts = await Astro.glob("./*.mdx");
+  return paginate(posts, { pageSize: 3 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title="Health Freak | Real Info Real People">
+  <Search />
+  <div class="rounded-md md:px-4 md:grid md:grid-cols-3 md:gap-4 lg:gap-8">
+    <div class="md:col-span-2">
+      <h1 class="inline-block">Health Freak Blog</h1>
+      <div class="bg-slate-200 p-4 md:p-8 rounded-lg">
+        {page.data.map((post: any) => <Card href={"/blog/posts/" + post.frontmatter.slug} img={post.frontmatter.image} title={post.frontmatter.title} body={post.frontmatter.excerpt} />)}
+      </div>
+    </div>
+  </div>
+</Layout>

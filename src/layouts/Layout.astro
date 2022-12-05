@@ -1,0 +1,62 @@
+---
+import Nav from "../components/Nav.astro";
+import "../styles/global.css";
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="noindex" />
+    <!-- <link href="/_pagefind/pagefind-ui.css" rel="stylesheet" /> -->
+    <script src="/_pagefind/pagefind-ui.js" type="text/javascript"></script>
+    <title>{title}</title>
+  </head>
+  <body class="font-sans">
+    <div id="bg-overlay" class="hidden fixed z-[9999] top-0 left-0 w-full h-full bg-white/30 backdrop-blur-sm"></div>
+    <Nav />
+    <main id="main-content" class="overflow-hidden pt-[170px] lg:pt-[100px] md:px-16 md:gap-4 lg:px-56">
+      <section class="main-content min-w-full">
+        <slot />
+      </section>
+    </main>
+    <footer class="bg-slate-100 shadow-inner h-[100px]">
+      <div class="text-center pt-4">© YadaYada 2022 | About Us | Contact Us</div>
+    </footer>
+  </body>
+</html>
+<script client:load>
+  // Search bar
+  const searchEl = document.getElementById("search");
+  const bgOverlay = document.getElementById("bg-overlay");
+  searchEl.addEventListener("click", () => {
+    bgOverlay.classList.remove("hidden");
+    searchEl.focus();
+  });
+  bgOverlay.addEventListener("click", () => {
+    bgOverlay.classList.add("hidden");
+    searchEl.innerHTML = "";
+    new PagefindUI({ element: "#search", showImages: false });
+  });
+
+  // Menu toggle when anything outside mobile menu is clicked.
+  const mainDiv = document.getElementById("main-content");
+
+  mainDiv.addEventListener("click", () => {
+    document.getElementById("hamburger").checked = false;
+  });
+</script>
+
+<style>
+  main {
+    min-height: calc(100vh - 168px);
+  }
+</style>

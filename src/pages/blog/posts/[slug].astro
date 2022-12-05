@@ -1,0 +1,54 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await Astro.glob("./*.mdx");
+
+  return posts.map((post) => ({
+    params: {
+      slug: post.frontmatter.slug,
+    },
+    props: {
+      post,
+    },
+  }));
+}
+
+const { Content, frontmatter } = Astro.props.post;
+---
+
+<Layout title={frontmatter.title + " | Health Freak"}>
+  <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+    <div class="mt-8 lg:col-span-3">
+      <article data-pagefind-body>
+        <div class="m-auto relative">
+          <div class="h-[250px] overflow-hidden">
+            <img class="main-img" src={frontmatter.image} />
+          </div>
+        </div>
+        <center>
+          <h1>{frontmatter.title}</h1>
+        </center>
+        <Content />
+      </article>
+    </div>
+  </div>
+</Layout>
+
+<script client:load>
+  if (document.getElementById("search").innerHTML.trim() === "") {
+    new PagefindUI({ element: "#search", showImages: false });
+  } else {
+    document.getElementById("search").innerHTML = "";
+  }
+</script>
+
+<style is:global>
+  /* .main-img {
+    margin: 0 auto;
+    height: 350px;
+  } */
+  article p {
+    text-indent: 28px !important;
+  }
+</style>

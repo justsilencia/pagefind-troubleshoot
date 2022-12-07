@@ -5,19 +5,30 @@
     z-index: 11000;
   }
   #search input {
-    width: calc(100vw / 4);
+    position: fixed;
+    width: calc(100vw - 20px);
+    margin-left: 10px;
     padding: 6px;
     border-radius: 25px;
     background: rgb(226, 232, 240);
-    outline: 1px solid lightblue;
     z-index: 11000;
   }
-  #search .pagefind-ui__results-area {
+  #search input:focus {
+    outline: 1px solid black;
+  }
+  .toggle-pagefind-drawer {
+    position: absolute;
     background-color: #fff;
-    outline: 3px solid lightblue;
-    padding: 10px;
+    outline: 2px solid gray;
     border-radius: 8px;
+    top: 160px;
+    width: calc(100vw - 30px);
+    left: 15px;
+    padding: 10px;
     margin-top: 8px;
+  }
+  #search .pagefind-ui__results-area {
+    width: auto;
   }
   #search .pagefind-ui__message {
     font-size: 12px;
@@ -31,15 +42,86 @@
     color: orange;
     font-size: 16px;
   }
+
+  @media (min-width: 768px) {
+    #search input {
+      position: static;
+      width: calc(100vw / 2);
+    }
+    .toggle-pagefind-drawer {
+      top: 160px;
+      width: calc(100vw / 2);
+      left: calc(50vw - calc(100vw / 4));
+      padding: 10px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #search input {
+      position: static;
+      width: calc(100vw / 4);
+    }
+    .toggle-pagefind-drawer {
+      top: 160px;
+      width: calc(100vw / 4);
+      left: calc(50vw - calc(100vw / 8));
+      padding: 10px;
+    }
+  }
 </style>
 
 <script client:load>
+  // Make resultsDrawer and searchInput global so it can renew state when pagefind object is destroyed and recreated.
+  let resultsDrawer;
+  let searchInput;
+
+  // Initialize pagefind searchbar.
+  new PagefindUI({ element: "#search", showImages: false });
+
+  // For toggling visibility of the pagefind search results drawer.
+  toggleResultsDrawer();
+
+  // For allowing the search field visibility to be toggled. Useful especially for mobile to conserve screen size.
   const searchBtn = document.getElementById("search-btn");
   searchBtn.addEventListener("click", () => {
     if (document.getElementById("search").innerHTML.trim() === "") {
       new PagefindUI({ element: "#search", showImages: false });
+
+      // For toggling visibility of the pagefind search results drawer.
+      toggleResultsDrawer();
     } else {
       document.getElementById("search").innerHTML = "";
     }
   });
+
+  // For creating a frosted glass overlay when the search input is focused.
+  const searchEl = document.getElementById("search");
+  const bgOverlay = document.getElementById("bg-overlay");
+
+  searchEl.addEventListener("click", () => {
+    bgOverlay.classList.remove("hidden");
+    searchEl.focus();
+  });
+
+  bgOverlay.addEventListener("click", () => {
+    bgOverlay.classList.add("hidden");
+    searchEl.innerHTML = "";
+    new PagefindUI({ element: "#search", showImages: false });
+
+    // For toggling visibility of the pagefind search results drawer.
+    toggleResultsDrawer();
+  });
+
+  searchInput.addEventListener("blur", () => {
+    resultsDrawer.classList.toggle("toggle-pagefind-drawer");
+  });
+
+  function toggleResultsDrawer() {
+    resultsDrawer = document.getElementsByClassName("pagefind-ui__drawer")[0];
+    searchInput = document.getElementsByClassName("pagefind-ui__search-input")[0];
+
+    searchInput.addEventListener("focus", () => {
+      resultsDrawer.classList.toggle("toggle-pagefind-drawer");
+    });
+  }
 </script>

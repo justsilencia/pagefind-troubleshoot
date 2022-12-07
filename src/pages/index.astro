@@ -4,11 +4,10 @@ import Card from "../components/Card.astro";
 const posts = await Astro.glob("./blog/posts/*.mdx");
 ---
 
-<Layout title="Health Freak | Real Info Real People">
+<Layout title="Pagefind Troubleshooting">
   <div class="rounded-md md:p-4 md:grid md:grid-cols-3 md:gap-4 lg:gap-8">
     <div class="md:col-span-2">
-      <h1 class="inline-block">Popular Articles</h1>&nbsp;&nbsp;&nbsp;
-      <a href="/blog/posts/1" class="text-[#9215FF] font-bold">View More!</a>
+      <h1 class="inline-block">Popular Articles</h1>
       <div class="lg:bg-slate-200 p-4 md:p-8 rounded-lg">
         {posts.map((post: any) => <Card href={"/blog/posts/" + post.frontmatter.slug} img={post.frontmatter.image} title={post.frontmatter.title} body={post.frontmatter.excerpt} />)}
       </div>

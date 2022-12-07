@@ -1,5 +1,5 @@
 ---
-import Search from "./Search.astro";
+import Search from "../components/Search.astro";
 ---
 
 <nav class="fixed w-[100vw] z-[9999]">
@@ -30,7 +30,6 @@ import Search from "./Search.astro";
             <a href="#" id="search-btn">
               <img class="w-8 h-6 rounded-full" src="/images/icons/search.svg" alt="Search icon" />
             </a>
-            <!-- <Search /> -->
           </li>
         </ul>
       </div>
@@ -52,19 +51,17 @@ import Search from "./Search.astro";
         <a href="#" id="search-btn" class="mr-5 lg:hidden">
           <img class="w-8 h-6 rounded-full" src="/images/icons/search.svg" alt="Search icon" />
         </a>
-        <button
-          type="button"
-          class="text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-          id="user-menu-button"
-          aria-expanded="false"
-          data-dropdown-toggle="user-dropdown"
-          data-dropdown-placement="bottom"
-        >
+        <button type="button" class="text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
           <span class="sr-only">Open user menu</span>
           <img class="w-8 h-8 rounded-full" src="/images/icons/empty-profile-filled.svg" alt="empty profile photo" />
         </button>
       </div>
     </div>
+  </div>
+  <div class="mt-2">
+    <center>
+      <Search />
+    </center>
   </div>
 </nav>
 

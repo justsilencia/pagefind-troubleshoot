@@ -29,31 +29,10 @@ const { title } = Astro.props;
       </section>
     </main>
     <footer class="bg-slate-100 shadow-inner h-[100px]">
-      <div class="text-center pt-4">© YadaYada 2022 | About Us | Contact Us</div>
+      <div class="text-center pt-4">© YadaYada 2022</div>
     </footer>
   </body>
 </html>
-<script client:load>
-  // Search bar
-  const searchEl = document.getElementById("search");
-  const bgOverlay = document.getElementById("bg-overlay");
-  searchEl.addEventListener("click", () => {
-    bgOverlay.classList.remove("hidden");
-    searchEl.focus();
-  });
-  bgOverlay.addEventListener("click", () => {
-    bgOverlay.classList.add("hidden");
-    searchEl.innerHTML = "";
-    new PagefindUI({ element: "#search", showImages: false });
-  });
-
-  // Menu toggle when anything outside mobile menu is clicked.
-  const mainDiv = document.getElementById("main-content");
-
-  mainDiv.addEventListener("click", () => {
-    document.getElementById("hamburger").checked = false;
-  });
-</script>
 
 <style>
   main {

@@ -1,18 +1,17 @@
 ---
-import Search from "../components/Search.astro";
+import SignupUi from "./SignupUi.astro";
+import Search from "./Search.astro";
 ---
 
-<nav class="fixed w-[100vw] z-[9999]">
-  <div class="flex items-center shadow-md p-4 md:py-2 md:px-36 lg:px-52 bg-slate-100">
+<nav class="w-[100vw] z-[9999]">
+  <div class="flex items-center bg-slate-50 shadow-md pl-4 md:px-36 lg:px-[60px] 2xl:px-[260px]">
     <!-- Mobile expand menu button -->
     <input type="checkbox" name="hamburger" id="hamburger" class="peer" hidden />
     <label for="hamburger" class="peer-checked:hamburger block relative z-20 p-6 mr-0 cursor-pointer border-l lg:border-l-0 lg:hidden">
       <div aria-hidden="true" class="m-auto h-0.5 w-6 rounded bg-sky-900 transition duration-300"></div>
       <div aria-hidden="true" class="m-auto mt-2 h-0.5 w-6 rounded bg-sky-900 transition duration-300"></div>
     </label>
-    <div
-      class="fixed bg-slate-300 lg:bg-slate-100 z-[2000] peer-checked:translate-x-0 inset-0 w-[calc(100%-5.5rem)] md:w-[40vw] translate-x-[-100%] border-r shadow-xl transition duration-300 lg:border-r-0 lg:w-auto lg:static lg:shadow-none lg:translate-x-0 flex-1 order-1 lg:order-first"
-    >
+    <div class="responsive-nav">
       <!-- Main menu -->
       <div class="relative z-20">
         <ul class="px-6 pt-32 text-black space-y-8 md:px-12 lg:space-y-0 lg:flex lg:space-x-12 lg:pt-0">
@@ -27,9 +26,9 @@ import Search from "../components/Search.astro";
             </a>
           </li>
           <li class="hidden lg:block">
-            <a href="#" id="search-btn">
-              <img class="w-8 h-6 rounded-full" src="/images/icons/search.svg" alt="Search icon" />
-            </a>
+            <!-- <a href="#" id="search-btn">
+              <img class="w-8 h-6 rounded-full hover:bg-blue-200" src="/images/icons/search.svg" alt="Search icon" />
+            </a> -->
           </li>
         </ul>
       </div>
@@ -39,8 +38,8 @@ import Search from "../components/Search.astro";
         <!-- Brand Logo. -->
         <div class="md:text-center">
           <a href="/">
-            <h2 class="text-[16px] md:text-[22px] md:inline text-black">Testing Pagefind</h2>
-            <div class="md:inline md:ml-2 text-sm">Astro Implementation</div>
+            <span class="block font-[Dalfitra] text-black font-bold text-[26px] leading-6 md:leading-snug md:text-[32px] md:inline">Health Freak</span>
+            <div class="md:inline md:ml-2 text-xs">Real Analysis | Real People</div>
           </a>
         </div>
       </div>
@@ -48,25 +47,67 @@ import Search from "../components/Search.astro";
     <!-- Secondary menu. -->
     <div class="flex-1 mr-5 text-right order-first lg:order-2 lg:mr-0">
       <div class="flex justify-end items-center text-right">
-        <a href="#" id="search-btn" class="mr-5 lg:hidden">
+        <!-- <a href="#" id="mobile-search-btn" class="mr-5 lg:hidden">
           <img class="w-8 h-6 rounded-full" src="/images/icons/search.svg" alt="Search icon" />
-        </a>
+        </a> -->
         <button type="button" class="text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
           <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="/images/icons/empty-profile-filled.svg" alt="empty profile photo" />
+          <img id="btn-account" class="w-8 h-8 rounded-full" src="/images/icons/empty-profile-filled.svg" alt="empty profile photo" />
         </button>
+        <SignupUi />
       </div>
     </div>
   </div>
-  <div class="mt-2">
-    <center>
-      <Search />
-    </center>
-  </div>
+  <Search />
 </nav>
 
+<script>
+  // Toggle the registration screen
+  const btnAccount = document.getElementById("user-menu-button");
+  const uiRegistration = document.getElementById("registration-ui");
+
+  if (btnAccount) {
+    btnAccount.addEventListener("click", () => {
+      if (uiRegistration) uiRegistration.classList.toggle("hidden");
+      //if (bgOverlay) bgOverlay.classList.toggle("hidden");
+    });
+  }
+</script>
+
 <style>
-  h2 {
-    font-family: Dalfitra !important;
+  .responsive-nav {
+    @apply fixed
+    flex-1 
+    order-1 
+    bg-slate-50
+    z-[11001] 
+    peer-checked:translate-x-0 
+    inset-0 
+    w-[calc(100%-5.5rem)] 
+    translate-x-[-100%] 
+    border-r 
+    shadow-xl
+    transition 
+    duration-300 
+    md:w-[40vw] 
+    lg:bg-slate-50
+    lg:border-r-0 
+    lg:w-auto 
+    lg:static 
+    lg:shadow-none 
+    lg:translate-x-0 
+    lg:order-first;
+  }
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+    to {
+      opacity: 1;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
   }
 </style>
